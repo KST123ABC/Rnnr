@@ -34,6 +34,7 @@ for s in states:
                 http4=urllib3.PoolManager()
                 response4=http3.request('GET', offender_profile)
                 soup4=BeautifulSoup(response4.data)
+                address = soup4.find("span", {"itemprop" : "name"}).find_all(text=True)
                 description = soup4.find_all("span", {"itemprop" : "description"})
                 address = soup4.find("span", {"itemprop" : "streetAddress"}).find_all(text=True)
                 locality = soup4.find("span", {"itemprop" : "addressLocality"}).find_all(text=True)
