@@ -3,11 +3,14 @@ import urllib3
 import json
 import re
 
+urllib3.disable_warnings()
+
 url ="https://www.homefacts.com/offenders.html"
 http=urllib3.PoolManager()
 response=http.request('GET', url)
 
 soup=BeautifulSoup(response.data)
+
 
 states=soup.find_all(href=re.compile("/offenders/"))
 for s in states:
