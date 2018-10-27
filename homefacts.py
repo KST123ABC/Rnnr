@@ -25,15 +25,15 @@ for s in states:
         print("https://homefacts.com"+c.get('href'))
         offenders=soup3.find_all(href=re.compile("/offender-detail/"))
         print(offenders)
-        n=''
-        print("https://homefacts.com"+c.get('href').strip(".html")+str(n)+(".html"))
-        #while(1):
+        n=1
+        cmp_str = "https://homefacts.com"+c.get('href').strip(".html")+str(n)+(".html")
+        while():
         #url_str == "https://homefacts.com"+c.get('href').strip(".html")+str(n)+(".html")):
-        offenders=soup3.find_all(href=re.compile("/offender-detail/"))
-        for o in offenders:
-            print("true")
-            http4=urllib3.PoolManager()
-            response4=http4.request('GET', "https://www.homefacts.com"+o.get('href'))
-            soup4=BeautifulSoup(response4.data)
-            offender=soup4.find_all(href=re.compile("/offender-detail/"))
-            print(offender)
+        #offenders=soup3.find_all(href=re.compile("/offender-detail/"))
+        #for o in offenders:
+        #    print("true")
+        #    http4=urllib3.PoolManager()
+        #    response4=http4.request('GET', "https://www.homefacts.com"+o.get('href'))
+        #    soup4=BeautifulSoup(response4.data)
+        #    offender=soup4.find_all(href=re.compile("/offender-detail/"))
+        #    print(offender)
