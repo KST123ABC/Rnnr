@@ -27,4 +27,5 @@ for s in states:
             http4=urllib3.PoolManager()
             response4=http4.request('GET', "https://www.homefacts.com"+o.get('href'))
             soup4=BeautifulSoup(response4.data)
-            offender=soup
+            offender=soup4.find_all(href=re.compile("https://homefacts.com"+o.get('href')))
+            print(offender)
