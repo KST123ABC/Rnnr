@@ -5,12 +5,13 @@ import re
 
 urllib3.disable_warnings()
 
+file = open('output.txt', 'wb')
+
 url ="https://www.homefacts.com/offenders.html"
 http=urllib3.PoolManager()
 response=http.request('GET', url)
 
 soup=BeautifulSoup(response.data)
-
 
 states=soup.find_all(href=re.compile("/offenders/"))
 for s in states:
@@ -23,7 +24,6 @@ for s in states:
         response3=http3.request('GET', 'https://www.homefacts.com'+c.get('href'))
         soup3=BeautifulSoup(response3.data)
         print("https://homefacts.com"+c.get('href'))
-        offenders=soup3.find_all(href=re.compile("/offender-detail/"))
         #print(offenders)
         #cmp_str = "https://homefacts.com"+c.get('href').strip(".html")+"-"+str(n)+(".html")
         #print(cmp_str)
@@ -35,4 +35,7 @@ for s in states:
             soup4=BeautifulSoup(response4.data)
             offender=soup4.find_all(href=re.compile("/offender-detail/"))
             print(offender)
+            for link in offender:
+                file.write(link.encode())
             max_pg-=1
+file.close()
