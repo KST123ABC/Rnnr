@@ -24,9 +24,10 @@ for s in states:
         soup3=BeautifulSoup(response3.data)
         print("https://homefacts.com"+c.get('href'))
         offenders=soup3.find_all(href=re.compile("/offender-detail/"))
-        print(offenders)
+        #print(offenders)
         n=1
-        cmp_str = "https://homefacts.com"+c.get('href').strip(".html")+str(n)+(".html")
+        cmp_str = "https://homefacts.com"+c.get('href').strip(".html")+"-"+str(n)+(".html")
+        print(cmp_str)
         #while():
         #url_str == "https://homefacts.com"+c.get('href').strip(".html")+str(n)+(".html")):
         #offenders=soup3.find_all(href=re.compile("/offender-detail/"))
