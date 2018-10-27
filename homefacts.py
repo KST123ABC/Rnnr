@@ -34,8 +34,9 @@ for s in states:
                 http4=urllib3.PoolManager()
                 response4=http3.request('GET', offender_profile)
                 soup4=BeautifulSoup(response4.data)
-                det =  soup4.find('dd').span
+                det =  soup4.find('dd')
                 a = det.find_all(text=True)
-                print(a)
+                print(''.join(a))
+                
             max_pg-=1
 file.close()
