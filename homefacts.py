@@ -27,7 +27,7 @@ for s in states:
         print(offenders)
         n=1
         cmp_str = "https://homefacts.com"+c.get('href').strip(".html")+str(n)+(".html")
-        while():
+        #while():
         #url_str == "https://homefacts.com"+c.get('href').strip(".html")+str(n)+(".html")):
         #offenders=soup3.find_all(href=re.compile("/offender-detail/"))
         #for o in offenders:
