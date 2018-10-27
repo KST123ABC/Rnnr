@@ -5,14 +5,13 @@ import re
 
 urllib3.disable_warnings()
 
-file = open('output.txt', 'wb')
 
 url ="https://www.homefacts.com/offenders.html"
 http=urllib3.PoolManager()
 response=http.request('GET', url)
 
 soup=BeautifulSoup(response.data)
-duplicate = []
+off_list = []
 deduplicate = []
 
 states=soup.find_all(href=re.compile("/offenders/"))
@@ -36,10 +35,10 @@ for s in states:
                 http4=urllib3.PoolManager()
                 response4=http3.request('GET', offender_profile)
                 soup4=BeautifulSoup(response4.data)
-                name = soup4.find("span", {"itemprop" : "name"}).find_all(text=True)
+                #name = soup4.find("span", {"itemprop" : "name"}).find_all(text=True)
                 description = soup4.find_all("span", {"itemprop" : "description"})
-                address = soup4.find("span", {"itemprop" : "streetAddress"}).find_all(text=True)
-                locality = soup4.find("span", {"itemprop" : "addressLocality"}).find_all(text=True)
+                #address = soup4.find("span", {"itemprop" : "streetAddress"}).find_all(text=True)
+                #locality = soup4.find("span", {"itemprop" : "addressLocality"}).find_all(text=True)
                 region = soup4.find("span", {"itemprop" : "addressRegion"}).find_all(text=True)
                 birth = soup4.find("span", {"itemprop" : "birthDate"}).find_all(text=True)
                 race = description[0].find_all(text=True)
@@ -49,12 +48,21 @@ for s in states:
                 hair = description[2].find_all(text=True)
                 weight = soup4.find("span", {"itemprop" : "weight"}).find_all(text=True)
                 offense = description[3].find_all(text=True)
-                content = list(zip(name, address, locality, region, birth, race, gender, eye, height, hair, weight, offense))
-                print(content)
-                duplicate.append(content)
+
+                content = [ soup4.find("span", {"itemprop" : "name"}).find_all(text=True),            # name 
+                            soup4.find("span", {"itemprop" : "streetAddress"}).find_all(text=True),   # streetAddress
+                            soup4.find("span", {"itemprop" : "addressLocality"}).find_all(text=True), # addressLocality
+                            soup4.find("span", {"itemprop" : "addressRegion"}).find_all(text=True),
+                            soup4.find("span", {"itemprop" : "birthDate"}).find_all(text=True),         #birthDate
+                            description[0].find_all(text=True),
+                            soup4.find("span", {"itemprop" : "gender"}).find_all(text=True),            #gender
+                            description[1].find_all(text=True),
+                            soup4.find("span", {"itemprop" : "height"}).find_all(text=True),           #height
+                            description[2].find_all(text=True),
+                            soup4.find("span", {"itemprop" : "weight"}).find_all(text=True),
+                            description[0].find_all(text=True)]                                         # 
+                if(content not in off_list):
+                    off_list.append(content)
+                print(off_list)
+                print("\n\n\n")
             max_pg-=1
-for idx in range(len(duplicate)-1):
-    if duplicate[idx] != duplicate[idx+1]:
-        deduplicate.append(duplicate[idx])
-print(deduplicate)
-file.close()
