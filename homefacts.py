@@ -34,9 +34,14 @@ for s in states:
                 http4=urllib3.PoolManager()
                 response4=http3.request('GET', offender_profile)
                 soup4=BeautifulSoup(response4.data)
-                det =  soup4.find('dd')
-                a = det.find_all(text=True)
-                print(''.join(a))
-                
+                #print(soup4.find_all("span", {"itemprop": "*"}))
+                #print(soup4.find("span", {"itemprop" : "streetAddress"}))
+                #print(soup4.find("span", {"itemprop" : "addressLocality"}))
+                #print(soup4.find("span", {"itemprop" : "addressRegion"}))
+                #print(soup4.find("span", {"itemprop" : "birthDate"}))
+                #print(soup4.find("span", {"itemprop" : "description"}))
+                #print(soup4.find("span", {"itemprop" : "gender"}))
+                #print(soup4.find("span", {"itemprop" : ""}))
+                #print(soup4.find("span", {"itemprop" : "streetAddress"}))
             max_pg-=1
 file.close()
