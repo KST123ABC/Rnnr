@@ -16,6 +16,7 @@ deduplicate = []
 
 states=soup.find_all(href=re.compile("/offenders/"))
 for s in states:
+    print(s)
     http2 = urllib3.PoolManager()
     response2=http2.request('GET', 'https://www.homefacts.com'+s.get('href'))
     soup2=BeautifulSoup(response2.data)
@@ -39,15 +40,15 @@ for s in states:
                 description = soup4.find_all("span", {"itemprop" : "description"})
                 #address = soup4.find("span", {"itemprop" : "streetAddress"}).find_all(text=True)
                 #locality = soup4.find("span", {"itemprop" : "addressLocality"}).find_all(text=True)
-                region = soup4.find("span", {"itemprop" : "addressRegion"}).find_all(text=True)
-                birth = soup4.find("span", {"itemprop" : "birthDate"}).find_all(text=True)
-                race = description[0].find_all(text=True)
-                gender = soup4.find("span", {"itemprop" : "gender"}).find_all(text=True)
-                eye = description[1].find_all(text=True)
-                height = soup4.find("span", {"itemprop" : "height"}).find_all(text=True)
-                hair = description[2].find_all(text=True)
-                weight = soup4.find("span", {"itemprop" : "weight"}).find_all(text=True)
-                offense = description[3].find_all(text=True)
+                #region = soup4.find("span", {"itemprop" : "addressRegion"}).find_all(text=True)
+                #birth = soup4.find("span", {"itemprop" : "birthDate"}).find_all(text=True)
+                #race = description[0].find_all(text=True)
+                #gender = soup4.find("span", {"itemprop" : "gender"}).find_all(text=True)
+                #eye = description[1].find_all(text=True)
+                #height = soup4.find("span", {"itemprop" : "height"}).find_all(text=True)
+                #hair = description[2].find_all(text=True)
+                #weight = soup4.find("span", {"itemprop" : "weight"}).find_all(text=True)
+                #offense = description[3].find_all(text=True)
 
                 content = [ soup4.find("span", {"itemprop" : "name"}).find_all(text=True),            # name 
                             soup4.find("span", {"itemprop" : "streetAddress"}).find_all(text=True),   # streetAddress
@@ -60,7 +61,7 @@ for s in states:
                             soup4.find("span", {"itemprop" : "height"}).find_all(text=True),           #height
                             description[2].find_all(text=True),
                             soup4.find("span", {"itemprop" : "weight"}).find_all(text=True),
-                            description[0].find_all(text=True)]                                         # 
+                            description[3].find_all(text=True)]                                         # 
                 if(content not in off_list):
                     off_list.append(content)
                 print(off_list)
