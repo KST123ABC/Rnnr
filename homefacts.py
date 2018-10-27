@@ -23,9 +23,6 @@ for s in states:
         http3=urllib3.PoolManager()
         response3=http3.request('GET', 'https://www.homefacts.com'+c.get('href'))
         soup3=BeautifulSoup(response3.data)
-        #print(offenders)
-        #cmp_str = "https://homefacts.com"+c.get('href').strip(".html")+"-"+str(n)+(".html")
-        #print(cmp_str)
         max_pg = int(re.search(r'\d+', (soup3.find("a", {"class", "last"}).get('href'))).group())
         while(max_pg>=1):
             url_str = "https://homefacts.com"+c.get('href').strip(".html")+'-'+str(max_pg)+(".html")
