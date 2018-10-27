@@ -31,10 +31,11 @@ for s in states:
             offender=soup4.find_all(href=re.compile("/offender-detail/"))
             for link in offender:
                 offender_profile=("http:"+link.get('href'))
-                print(offender_profile)
                 http4=urllib3.PoolManager()
                 response4=http3.request('GET', offender_profile)
                 soup4=BeautifulSoup(response4.data)
-                print(soup4.find_all('dd'))
+                det =  soup4.find('dd').span
+                a = det.find_all(text=True)
+                print(a)
             max_pg-=1
 file.close()
