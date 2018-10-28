@@ -15,7 +15,8 @@ con=conn.cursor()
 con.execute("SELECT * FROM offenders;")
 rows = con.fetchall()
 for r in rows:
-    if r[13] is None:
+    print(r[13])
+    if r[13] is "None":
         geolocator = Nominatim(user_agent="rnnr-app")
         location = geolocator.geocode(r[2] + " " + r[3]+" "+r[4])
         if location != None:
