@@ -16,11 +16,11 @@ con.execute("SELECT * FROM offenders;")
 rows = con.fetchall()
 for r in rows:
     if r[13] is None:
-      geolocator = Nominatim(user_agent="rnnr-app")
-      location = geolocator.geocode(r[2] + " " + r[3]+" "+r[4])
-      if location != None:
-        print((location.latitude, location.longitude))
-        con.execute("UPDATE offenders SET lat = (?) WHERE id LIKE ?", [location.latitude, r[0]])
-        con.execute("UPDATE offenders SET lon = (?) WHERE id LIKE ?", [location.longitude, r[0]])
-        conn.commit()
+        geolocator = Nominatim(user_agent="rnnr-app")
+        location = geolocator.geocode(r[2] + " " + r[3]+" "+r[4])
+        if location != None:
+            print((location.latitude, location.longitude))
+            con.execute("UPDATE offenders SET lat = (?) WHERE id LIKE ?", [location.latitude, r[0]])
+            con.execute("UPDATE offenders SET lon = (?) WHERE id LIKE ?", [location.longitude, r[0]])
+            conn.commit()
 conn.close()
